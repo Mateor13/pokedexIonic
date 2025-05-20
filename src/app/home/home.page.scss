@@ -1,0 +1,145 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+ion-toolbar {
+  background: #ef5350 !important;
+  color: #fff !important;
+}
+
+ion-title {
+  color: #fff !important;
+  font-family: 'Pokemon Solid', Arial, sans-serif;
+  letter-spacing: 2px;
+  font-size: 2rem;
+  text-shadow: 2px 2px 0 #ef5350, 4px 4px 0 #fff;
+}
+
+ion-card {
+  border-radius: 20px;
+  box-shadow: 0 4px 16px 0 rgba(33, 150, 243, 0.15);
+  border: 3px solid #ef5350;
+  background: linear-gradient(135deg, #e3f2fd 80%, #b3e5fc 100%);
+  margin-bottom: 24px;
+}
+
+ion-card-title {
+  color: #1976d2;
+  font-family: 'Pokemon Solid', Arial, sans-serif;
+  text-shadow: 1px 1px 0 #ef5350;
+  font-size: 1.3rem;
+}
+
+ion-card-content p,
+ion-card-content ul {
+  color: #0d47a1;
+  font-size: 1rem;
+}
+
+ion-searchbar {
+  --background: #e3f2fd;
+  --color: #1976d2;
+  --placeholder-color: #90caf9;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+ion-button {
+  --background: #1976d2;
+  --color: #fff;
+  --border-radius: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border: 2px solid #ef5350;
+}
+
+img {
+  border-radius: 12px;
+  background: #b3e5fc;
+  border: 2px solid #ef5350;
+  padding: 8px;
+  margin-bottom: 8px;
+  max-width: 120px;
+  max-height: 120px;
+}
+
+a {
+  color: #1976d2;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+ion-card-header {
+  background: #b3e5fc;
+  border-radius: 16px 16px 0 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #ef5350;
+}
+
+/* Estilo especial para las características */
+.caracteristicas-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 12px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.caracteristica-item {
+  background: #e3f2fd;
+  border: 2px solid #ef5350;
+  border-radius: 10px;
+  padding: 6px 14px;
+  color: #1976d2;
+  font-weight: bold;
+  font-size: 0.98rem;
+  box-shadow: 1px 1px 4px #b3e5fc;
+  display: inline-block;
+}
+
+/* Opcional: para los títulos de sección */
+.caracteristicas-titulo {
+  color: #ef5350;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+}
+
+ion-content {
+  --background: #23272b !important;
+  background: #23272b !important;
+}
+
+.pokemon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+  justify-content: space-between;
+}

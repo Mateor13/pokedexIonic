@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/']">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ pokemon?.name | titlecase }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-container *ngIf="pokemon">
+    <ion-card class="pokemon-card">
+      <div style="display: flex; justify-content: center; gap: 16px;">
+        <img [src]="pokemon.sprites?.front_default" [alt]="pokemon.name" />
+        <img [src]="pokemon.sprites?.back_default" [alt]="pokemon.name + ' back'"
+          *ngIf="pokemon.sprites?.back_default" />
+      </div>
+      <ion-card-header style="text-align: center;">
+        <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+        <p><strong>N° Pokédex:</strong> {{ pokemon.id }}</p>
+        <p><strong>Orden:</strong> {{ pokemon.order }}</p>
+      </ion-card-header>
+      <ion-card-content style="text-align: center;">
+        <ul class="caracteristicas-lista">
+          <li class="caracteristica-item"><strong>Altura:</strong> {{ pokemon.height }}</li>
+          <li class="caracteristica-item"><strong>Peso:</strong> {{ pokemon.weight }}</li>
+          <li class="caracteristica-item">
+            <strong>Tipo(s):</strong>
+            <span *ngFor="let t of pokemon.types; let last = last">
+              {{ t.type.name | titlecase }}<span *ngIf="!last">, </span>
+            </span>
+          </li>
+          <li class="caracteristica-item">
+            <strong>Habilidades:</strong>
+            <span *ngFor="let a of pokemon.abilities; let last = last">
+              {{ a.ability.name | titlecase }}<span *ngIf="!last">, </span>
+            </span>
+          </li>
+          <li class="caracteristica-item"><strong>Experiencia base:</strong> {{ pokemon.base_experience }}</li>
+        </ul>
+        <div class="caracteristicas-titulo"><strong>Estadísticas:</strong></div>
+        <ul class="caracteristicas-lista">
+          <li class="caracteristica-item" *ngFor="let stat of pokemon.stats">
+            {{ stat.stat.name | titlecase }}: {{ stat.base_stat }}
+          </li>
+        </ul>
+        <div class="caracteristicas-titulo"><strong>Movimientos principales:</strong></div>
+        <ul class="caracteristicas-lista">
+          <li class="caracteristica-item" *ngFor="let m of pokemon.moves.slice(0,5)">
+            {{ m.move.name | titlecase }}
+          </li>
+        </ul>
+        <div style="margin-top: 24px;">
+          <ion-item>
+            <ion-label position="stacked">Comentario</ion-label>
+            <ion-input [(ngModel)]="comment" placeholder="Escribe un comentario"></ion-input>
+          </ion-item>
+          <ion-button expand="block" color="primary" (click)="saveComment()">Guardar comentario</ion-button>
+        </div>
+
+        <div *ngIf="comments.length > 0" style="margin-top: 24px;">
+          <ion-list>
+            <ion-list-header>
+              <ion-label><strong>Comentarios</strong></ion-label>
+            </ion-list-header>
+            <ion-item *ngFor="let c of comments">
+              <ion-label>
+                <p style="margin-bottom: 4px;">{{ c.comment }}</p>
+                <small style="color: #888;">
+                  {{ c.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}
+                </small>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>

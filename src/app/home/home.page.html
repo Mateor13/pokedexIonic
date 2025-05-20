@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pokédex</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-searchbar
+    [(ngModel)]="searchTerm"
+    (ionChange)="searchPokemon()"
+    placeholder="Buscar Pokémon por nombre">
+  </ion-searchbar>
+
+  <ng-container *ngIf="searchedPokemon">
+  <ion-card *ngIf="!searchedPokemon.notFound" class="pokemon-card">
+    <img [src]="getImageUrl(searchedPokemon)" [alt]="searchedPokemon.name" />
+    <ion-card-header>
+      <ion-card-title>
+        <a [routerLink]="['/pokemon', searchedPokemon.name]" style="text-decoration: none; color: inherit;">
+          {{ searchedPokemon.name | titlecase }}
+        </a>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Altura:</strong> {{ searchedPokemon.height }}</p>
+      <p><strong>Peso:</strong> {{ searchedPokemon.weight }}</p>
+      <p><strong>Tipo(s):</strong>
+        <span *ngFor="let t of searchedPokemon.types; let last = last">
+          {{ t.type.name | titlecase }}<span *ngIf="!last">, </span>
+        </span>
+      </p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="searchedPokemon.notFound">
+    <ion-card-header>
+      <ion-card-title>
+        No se encontró el Pokémon "{{ searchedPokemon.name }}"
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</ng-container>
+
+  <ion-grid *ngIf="!searchedPokemon">
+    <ion-row>
+      <ion-col size="6" *ngFor="let pokemon of pokemons">
+        <ion-card class="pokemon-card">
+        <img [src]="getImageUrl(pokemon)" alt="{{ pokemon.name }}" />
+        <ion-card-header>
+          <ion-card-title>
+            <a [routerLink]="['/pokemon', pokemon.name]" style="text-decoration: none; color: inherit;">
+              {{ pokemon.name | titlecase }}
+            </a>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Altura:</strong> {{ pokemon.height }}</p>
+          <p><strong>Peso:</strong> {{ pokemon.weight }}</p>
+          <p><strong>Tipo(s):</strong>
+            <span *ngFor="let t of pokemon.types; let last = last">
+              {{ t.type.name | titlecase }}<span *ngIf="!last">, </span>
+            </span>
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+  <ion-infinite-scroll *ngIf="!searchedPokemon" (ionInfinite)="loadPokemons($event)" threshold="100px">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más Pokémon...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
